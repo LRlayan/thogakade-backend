@@ -1,3 +1,5 @@
+import OrderDetails from "./OrderDetails";
+
 class Item{
     id:string;
     name:string;
@@ -13,3 +15,5 @@ class Item{
         this.orderDetails = orderDetails;
     }
 }
+
+export default Item;
