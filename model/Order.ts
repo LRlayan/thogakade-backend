@@ -1,4 +1,6 @@
-class Order {
+import OrderDetails from "./OrderDetails";
+
+class Orders {
     orderId: number;
     customerId:number;
     orderDate:Date;
@@ -11,3 +13,5 @@ class Order {
         this.orderDetails = orderDetails;
     }
 }
+
+export default Orders;
