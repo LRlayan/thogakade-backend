@@ -13,3 +13,5 @@ class OrderDetails {
         this.price = price;
     }
 }
+
+export default OrderDetails;
