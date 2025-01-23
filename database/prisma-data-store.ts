@@ -18,3 +18,11 @@ export async function CustomerAdd(c: Customer) {
         console.log("error adding customer ", e)
     }
 }
+
+export async function GetAllCustomers() {
+    try {
+        return await prisma.customer.findMany();
+    } catch (e) {
+        console.log("get customers is failed!",e);
+    }
+}
