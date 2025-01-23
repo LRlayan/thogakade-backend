@@ -1,6 +1,6 @@
 import express from "express";
 import Customer from "../model/Customer";
-import {CustomerAdd} from "../database/prisma-data-store";
+import {CustomerAdd, GetAllCustomers} from "../database/prisma-data-store";
 
 export const CustomerRouter = express.Router();
 
@@ -13,4 +13,13 @@ CustomerRouter.post('/post', async (req,res) => {
         console.log("error adding customer",e);
         res.status(400).send("Failed to saved customer, Please try again");
     }
-})
+});
+
+CustomerRouter.get('/getAll', async (req,res) => {
+    try {
+        const getAllCustomers = await GetAllCustomers();
+        res.json(getAllCustomers);
+    } catch (e) {
+        console.log("getAll customers is failed!",e);
+    }
+});
