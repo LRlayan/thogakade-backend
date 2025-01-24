@@ -1,5 +1,6 @@
 import express from 'express';
-import {CustomerRouter} from "./routes/CustomerRoutes";
+import {CustomerRoutes} from "./routes/CustomerRoutes";
+import {ItemRoutes} from "./routes/ItemRoutes";
 const cors = require('cors');
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-app.use('/customer',CustomerRouter);
+app.use('/customer',CustomerRoutes);
+app.use('/item',ItemRoutes);
 
 app.listen(3002, () => console.log("Server start 3002 port"));
