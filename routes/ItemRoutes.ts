@@ -1,6 +1,6 @@
 import express from "express";
 import Item from "../model/Item";
-import {ItemAdd, ItemUpdate} from "../database/prisma-item-data-store";
+import {GetAllItems, ItemAdd, ItemDelete, ItemUpdate} from "../database/prisma-item-data-store";
 import {it} from "node:test";
 
 export const ItemRoutes = express.Router();
@@ -35,5 +35,14 @@ ItemRoutes.delete('/delete/:itemId', async (req,res) => {
     } catch (e) {
         console.log("error delete items",e);
         res.status(400).send('Failed to delete item, Please try again');
+    }
+});
+
+ItemRoutes.get('/getAll',async (req,res) => {
+    try {
+        await GetAllItems();
+    } catch (e) {
+        console.log("error getAll items",e);
+        res.status(400).send('Failed to get items, Please try again');
     }
 });

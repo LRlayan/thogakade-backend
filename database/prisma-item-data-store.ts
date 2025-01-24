@@ -42,3 +42,11 @@ export async function ItemDelete(itemId: string) {
         console.log("error deleting item",e);
     }
 }
+
+export async function GetAllItems() {
+    try {
+        return await prisma.item.findMany();
+    } catch (e) {
+        console.log("error get items",e);
+    }
+}
