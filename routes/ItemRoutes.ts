@@ -40,7 +40,8 @@ ItemRoutes.delete('/delete/:itemId', async (req,res) => {
 
 ItemRoutes.get('/getAll',async (req,res) => {
     try {
-        await GetAllItems();
+        const getAllItem = await GetAllItems();
+        res.json(getAllItem);
     } catch (e) {
         console.log("error getAll items",e);
         res.status(400).send('Failed to get items, Please try again');
