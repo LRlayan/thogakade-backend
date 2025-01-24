@@ -3,9 +3,9 @@ import Customer from "../model/Customer";
 import {CustomerAdd, CustomerUpdate, DeleteCustomer, GetAllCustomers} from "../database/prisma-data-store";
 import customer from "../model/Customer";
 
-export const CustomerRouter = express.Router();
+export const CustomerRoutes = express.Router();
 
-CustomerRouter.post('/post', async (req,res) => {
+CustomerRoutes.post('/post', async (req,res) => {
     const customer : Customer = req.body;
     try {
         const newCustomer = new Customer(1,customer.customerId, customer.name, customer.address, customer.email, customer.orders);
@@ -16,7 +16,7 @@ CustomerRouter.post('/post', async (req,res) => {
     }
 });
 
-CustomerRouter.get('/getAll', async (req,res) => {
+CustomerRoutes.get('/getAll', async (req,res) => {
     try {
         const getAllCustomers = await GetAllCustomers();
         res.json(getAllCustomers);
@@ -25,7 +25,7 @@ CustomerRouter.get('/getAll', async (req,res) => {
     }
 });
 
-CustomerRouter.put('/update/:id', async (req,res) => {
+CustomerRoutes.put('/update/:id', async (req,res) => {
     const customer = req.body;
     const id = req.params;
     try {
@@ -37,7 +37,7 @@ CustomerRouter.put('/update/:id', async (req,res) => {
     }
 });
 
-CustomerRouter.delete('/delete/:id', async (req,res) => {
+CustomerRoutes.delete('/delete/:id', async (req,res) => {
     const customerId = req.params.id;
     try {
         await DeleteCustomer(customerId);
