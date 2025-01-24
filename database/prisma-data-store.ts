@@ -19,6 +19,21 @@ export async function CustomerAdd(c: Customer) {
     }
 }
 
+export async function CustomerUpdate(c: Customer) {
+    try {
+        const updateCustomer = await prisma.customer.update({
+            where:{customerId: c.customerId},
+            data:{
+                name: c.name,
+                address: c.address,
+                email: c.email
+            }
+        })
+    } catch (e) {
+        console.log("error updating customer ",e);
+    }
+}
+
 export async function GetAllCustomers() {
     try {
         return await prisma.customer.findMany();

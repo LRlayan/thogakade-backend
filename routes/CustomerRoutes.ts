@@ -1,6 +1,7 @@
 import express from "express";
 import Customer from "../model/Customer";
-import {CustomerAdd, GetAllCustomers} from "../database/prisma-data-store";
+import {CustomerAdd, CustomerUpdate, GetAllCustomers} from "../database/prisma-data-store";
+import customer from "../model/Customer";
 
 export const CustomerRouter = express.Router();
 
@@ -21,5 +22,17 @@ CustomerRouter.get('/getAll', async (req,res) => {
         res.json(getAllCustomers);
     } catch (e) {
         console.log("getAll customers is failed!",e);
+    }
+});
+
+CustomerRouter.put('/update/:id', async (req,res) => {
+    const customer = req.body;
+    const id = req.params;
+    try {
+        const updateCustomer = new Customer(0,customer.customerId,customer.name,customer.address,customer.email,[]);
+        await CustomerUpdate(updateCustomer);
+    } catch (e) {
+        console.log("update customer is failed!",e);
+        res.status(400).send("Failed to update customer, Please try again");
     }
 });
