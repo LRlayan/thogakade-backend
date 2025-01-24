@@ -16,14 +16,24 @@ ItemRoutes.post('/post', async (req, res) => {
     }
 })
 
-ItemRoutes.put('/update/:id',async (req,res) => {
-    const id = req.params.id;
+ItemRoutes.put('/update/:itemId',async (req,res) => {
+    const itemId = req.params.itemId;
     const item = req.body;
     try {
-        const updateItem = new Item(item.id,item.itemId,item.name,item.quantity,item.price,[]);
+        const updateItem = new Item(item.id,itemId,item.name,item.quantity,item.price,[]);
         await ItemUpdate(updateItem);
     } catch (e) {
         console.log("error update items",e);
         res.status(400).send('Failed to update item, Please try again');
+    }
+});
+
+ItemRoutes.delete('/delete/:itemId', async (req,res) => {
+    const itemId = req.params.itemId;
+    try {
+        await ItemDelete(itemId);
+    } catch (e) {
+        console.log("error delete items",e);
+        res.status(400).send('Failed to delete item, Please try again');
     }
 });

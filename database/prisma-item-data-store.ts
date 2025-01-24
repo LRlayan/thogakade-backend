@@ -32,3 +32,13 @@ export async function ItemUpdate(i: Item) {
         console.log("error updating item",e);
     }
 }
+
+export async function ItemDelete(itemId: string) {
+    try {
+        const deleteItem = await prisma.item.delete({
+            where:{itemId: itemId}
+        });
+    } catch (e) {
+        console.log("error deleting item",e);
+    }
+}
