@@ -1,6 +1,6 @@
 import express from "express";
 import Customer from "../model/Customer";
-import {CustomerAdd, CustomerUpdate, GetAllCustomers} from "../database/prisma-data-store";
+import {CustomerAdd, CustomerUpdate, DeleteCustomer, GetAllCustomers} from "../database/prisma-data-store";
 import customer from "../model/Customer";
 
 export const CustomerRouter = express.Router();
@@ -34,5 +34,14 @@ CustomerRouter.put('/update/:id', async (req,res) => {
     } catch (e) {
         console.log("update customer is failed!",e);
         res.status(400).send("Failed to update customer, Please try again");
+    }
+});
+
+CustomerRouter.delete('/delete/:id', async (req,res) => {
+    const customerId = req.params.id;
+    try {
+        await DeleteCustomer(customerId);
+    } catch (e) {
+        console.log("Failed to delete customer!", e);
     }
 });

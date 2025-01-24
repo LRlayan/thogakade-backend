@@ -13,7 +13,7 @@ export async function CustomerAdd(c: Customer) {
                 address: c.address,
                 email: c.email,
             }
-        })
+        });
     } catch (e) {
         console.log("error adding customer ", e)
     }
@@ -28,9 +28,19 @@ export async function CustomerUpdate(c: Customer) {
                 address: c.address,
                 email: c.email
             }
-        })
+        });
     } catch (e) {
         console.log("error updating customer ",e);
+    }
+}
+
+export async function DeleteCustomer(customerId: string) {
+    try {
+        const deleteCustomer = await prisma.customer.delete({
+            where:{customerId: customerId}
+        });
+    } catch (e) {
+        console.log("error deleting customer",e)
     }
 }
 
